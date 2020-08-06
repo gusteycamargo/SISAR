@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateConceitosTable extends Migration
+class Matricula extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateConceitosTable extends Migration
      */
     public function up()
     {
-        Schema::create('conceitos', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('a');
-            $table->string('b');
-            $table->string('c');
-            $table->string('d');
+        Schema::create('matricula', function (Blueprint $table) {
+            $table->bigIncrements();
+            $table->unsignedBigInteger('aluno_id')->references('id')->on('alunos');
             $table->unsignedBigInteger('disciplina_id')->references('id')->on('disciplinas');
             $table->timestamps();
         });
@@ -31,6 +28,6 @@ class CreateConceitosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('conceitos');
+        Schema::dropIfExists('matricula');
     }
 }

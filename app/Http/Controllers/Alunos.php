@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Conceito;
 
-class Conceitos extends Controller
+class Aluno extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,15 +34,7 @@ class Conceitos extends Controller
      */
     public function store(Request $request)
     {
-        $novo = new Conceito();
-        $novo->a = $request->input('a');
-        $novo->b = $request->input('b');
-        $novo->c = $request->input('c');
-        $novo->d = $request->input('d');
-        $novo->disciplina_id = $request->input('disciplina_id');
-        $novo->save();
-
-        return json_encode($novo);
+        //
     }
 
     /**
@@ -54,11 +45,7 @@ class Conceitos extends Controller
      */
     public function show($id)
     {
-        $conceito = Conceito::where('disciplina_id', $id)->firstOrFail();
-        if(isset($conceito)) {
-            return json_encode($conceito);
-        }
-        return response('Conceito nao encontrado', 404);
+        //
     }
 
     /**
@@ -81,18 +68,7 @@ class Conceitos extends Controller
      */
     public function update(Request $request, $id)
     {
-        $novo = Conceito::where('disciplina_id', $id)->firstOrFail();
-        if(isset($novo)) {
-            $novo->a = $request->input('a');
-            $novo->b = $request->input('b');
-            $novo->c = $request->input('c');
-            $novo->d = $request->input('d');
-            $novo->disciplina_id = $request->input('disciplina_id');
-            $novo->save();
-
-            return json_encode($novo);
-        }
-        return response('Conceito nao encontrado', 404);
+        //
     }
 
     /**

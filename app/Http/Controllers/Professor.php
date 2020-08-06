@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Peso;
 
-class Pesos extends Controller
+class Professor extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,17 +34,7 @@ class Pesos extends Controller
      */
     public function store(Request $request)
     {
-        $novo = new Peso();
-        $novo->avaliacao = $request->input('avaliacao');
-        $novo->trabalho = $request->input('trabalho');
-        $novo->pri_bim = $request->input('pri_bim');
-        $novo->seg_bim = $request->input('seg_bim');
-        $novo->ter_bim = $request->input('ter_bim');
-        $novo->qua_bim = $request->input('qua_bim');
-        $novo->disciplina_id = $request->input('disciplina_id');
-        $novo->save();
-
-        return json_encode($novo);
+        //
     }
 
     /**
@@ -56,11 +45,7 @@ class Pesos extends Controller
      */
     public function show($id)
     {
-        $peso = Peso::where('disciplina_id', $id)->firstOrFail();
-        if(isset($peso)) {
-            return json_encode($peso);
-        }
-        return response('Peso nao encontrado', 404);
+        //
     }
 
     /**
@@ -83,20 +68,7 @@ class Pesos extends Controller
      */
     public function update(Request $request, $id)
     {
-        $novo = Peso::where('disciplina_id', $id)->firstOrFail();
-        if(isset($novo)) {
-            $novo->avaliacao = $request->input('avaliacao');
-            $novo->trabalho = $request->input('trabalho');
-            $novo->pri_bim = $request->input('pri_bim');
-            $novo->seg_bim = $request->input('seg_bim');
-            $novo->ter_bim = $request->input('ter_bim');
-            $novo->qua_bim = $request->input('qua_bim');
-            $novo->disciplina_id = $request->input('disciplina_id');
-            $novo->save();
-
-            return json_encode($novo);
-        }
-        return response('Peso nao encontrado', 404);
+        //
     }
 
     /**

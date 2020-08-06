@@ -23,9 +23,8 @@ class Disciplinas extends Controller
     {
         $novo = new Disciplina();
         $novo->nome = $request->input('nome');
-        $novo->num_de_bimestres = $request->input('num_de_bimestres');
-        $novo->componente_id = $request->input('componente_id');
-        $novo->turma_id = $request->input('turma');
+        $novo->professor_id = $request->input('professor_id');
+        $novo->curso_id = $request->input('curso_id');
         $novo->save();
 
         return json_encode($novo);
@@ -69,9 +68,8 @@ class Disciplinas extends Controller
         $disciplina = Disciplina::findOrFail($id);
         if(isset($disciplina)) {
             $disciplina->nome = $request->input('nome');
-            $disciplina->num_de_bimestres = $request->input('num_de_bimestres');
-            $disciplina->componente_id = $request->input('componente_id');
-            $disciplina->turma_id = $request->input('turma');
+            $disciplina->professor_id = $request->input('professor_id');
+            $disciplina->curso_id = $request->input('curso_id');
             $disciplina->save();
 
             return json_encode($disciplina);

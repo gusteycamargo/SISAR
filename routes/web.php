@@ -17,8 +17,6 @@ Route::get('/', function () {
     return view('main.main');
 });
 Route::resource('alunos', 'Alunos');
-Route::resource('pesos', 'Pesos');
-Route::resource('turmas', 'Turmas');
-Route::resource('disciplinas', 'Disciplinas');
 Route::resource('cursos', 'Cursos');
-Route::resource('componentes', 'Componentes');
+Route::resource('disciplinas', 'Disciplinas');
+Route::resource('professores', 'Professores');

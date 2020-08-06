@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Aluno;
 
-class Aluno extends Controller
+class Alunos extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,28 +14,20 @@ class Aluno extends Controller
      */
     public function index()
     {
-        //
+        $alunos = Aluno::all();
+
+        return view('aluno.index', compact(['alunos']));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $novo = new Aluno();
+        $novo->nome = $request->input('nome');
+        $novo->email = $request->input('email');
+        $novo->curso_id = $request->input('curso_id');
+        $novo->save();
+
+        return json_encode($novo);
     }
 
     /**
@@ -45,7 +38,11 @@ class Aluno extends Controller
      */
     public function show($id)
     {
-        //
+        $aluno = Aluno::findOrFail($id);
+        if(isset($aluno)) {
+            return json_encode($aluno);
+        }
+        return response('Aluno nao encontrado', 404);
     }
 
     /**
@@ -68,7 +65,16 @@ class Aluno extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $aluno = Aluno::findOrFail($id);
+        if(isset($aluno)) {
+            $aluno->nome = $request->input('nome');
+            $aluno->email = $request->input('email');
+            $aluno->curso_id = $request->input('curso_id');
+            $aluno->save();
+
+            return json_encode($curso);
+        }
+        return response('Aluno nao encontrado', 404);
     }
 
     /**

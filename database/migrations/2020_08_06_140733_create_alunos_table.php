@@ -14,7 +14,10 @@ class CreateAlunosTable extends Migration
     public function up()
     {
         Schema::create('alunos', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('nome');
+            $table->string('email');
+            $table->unsignedBigInteger('curso_id')->references('id')->on('cursos');
             $table->timestamps();
         });
     }

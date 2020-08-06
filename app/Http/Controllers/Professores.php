@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Professor;
 
-class Professor extends Controller
+class Professores extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,9 @@ class Professor extends Controller
      */
     public function index()
     {
-        //
+        $professores = Professor::all();
+
+        return view('professor.index', compact(['professores']));
     }
 
     /**
@@ -34,7 +37,12 @@ class Professor extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $novo = new Professor();
+        $novo->nome = $request->input('nome');
+        $novo->email = $request->input('email');
+        $novo->save();
+
+        return json_encode($novo);
     }
 
     /**
@@ -45,7 +53,11 @@ class Professor extends Controller
      */
     public function show($id)
     {
-        //
+        $professor = Professor::findOrFail($id);
+        if(isset($professor)) {
+            return json_encode($professor);
+        }
+        return response('Professor nao encontrada', 404);
     }
 
     /**
@@ -68,7 +80,15 @@ class Professor extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $professor = Professor::findOrFail($id);
+        if(isset($professor)) {
+            $professor->nome = $request->input('nome');
+            $professor->email = $request->input('email');
+            $professor->save();
+
+            return json_encode($professor);
+        }
+        return response('Professor nao encontrada', 404);
     }
 
     /**

@@ -1,30 +1,30 @@
-@extends('templates.main', ['titulo' => "Turma", 'tag' => "TURMA"])
+@extends('templates.main', ['titulo' => "Aluno", 'tag' => "ALUNO"])
 
 @section('conteudo')
  
      <div class='row'>
          <div class='col-sm-12'>
             <button class="btn btn-primary btn-block" onclick="criar()">
-                <b>Cadastrar Nova Turma</b>
+                <b>Cadastrar Novo Aluno</b>
             </button>
          </div>
      </div>
      <br>
  
      @component(
-         'components.tablelist', [
+         'components.tablelistAlunos', [
              "header" => ['Nome', 'Eventos'],
-             "data" => $turmas
+             "data" => $alunos
          ]
      )
      @endcomponent
 
-     <div class="modal" tabindex="-1" role="dialog" id="modalTurma">
+     <div class="modal" tabindex="-1" role="dialog" id="modalAluno">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form class="form-horizontal" id="formTurmas">
+                <form class="form-horizontal" id="formAlunos">
                     <div class="modal-header">
-                        <h5 class="modal-title">Nova Turma</h5>
+                        <h5 class="modal-title">Novo Aluno</h5>
                     </div>
                     <div class="modal-body">
                         <input type="hidden" id="id" class="form-control">
@@ -33,12 +33,8 @@
                             <input type="text" class="form-control" name="nome" id="nome" required>
                         </div>
                         <div class='col-sm-12' style="margin-top: 10px">
-                            <label>Ano</label>
-                            <input type="text" class="form-control" name="ano" id="ano" required>
-                        </div>
-                        <div class='col-sm-12' style="margin-top: 10px">
-                            <label>Abreviatura</label>
-                            <input type="text" class="form-control" name="abreviatura" id="abreviatura" required>
+                            <label>E-mail</label>
+                            <input type="text" class="form-control" name="email" id="email" required>
                         </div>
                         <div class='col-sm-12' style="margin-top: 10px">
                             <label>Curso</label>
@@ -56,20 +52,6 @@
         </div>
     </div>
 
-    <div class="modal fade" tabindex="-1" role="dialog" id="modalInfo">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Informações da turma</h5>
-                </div>
-                <div class="modal-body">
-                </div>
-                <div class="modal-footer">
-                    <button type="cancel" class="btn btn-success" data-dismiss="modal">Ok</button>
-                </div>
-            </div>
-        </div>
-     </div>
 @endsection
 
 @section('script')
@@ -91,12 +73,11 @@
 
         
         function criar() {
-            $('#modalTurma').modal().find('.modal-title').text("Nova Turma");
+            $('#modalAluno').modal().find('.modal-title').text("Novo Aluno");
             $('#nome').val('');
-            $('#ano').val('');
-            $('#abreviatura').val('');
+            $('#email').val('');
             $('#curso').val('');
-            $('#modalTurma').modal('show');
+            $('#modalAluno').modal('show');
         }
 
         $.ajaxSetup({
@@ -105,7 +86,7 @@
             }
         })
 
-        $("#formTurmas").submit( function(event) {
+        $("#formAlunos").submit( function(event) {
             event.preventDefault();
             if($("#id").val() != '') {
                 update( $("#id").val() );
@@ -113,36 +94,34 @@
             else {
                 insert();
             }
-            $('#modalTurma').modal('hide')
+            $('#modalAluno').modal('hide')
         })
 
         function insert() {
-            turmas = {
+            alunos = {
                 nome: $("#nome").val(),
-                ano: $("#ano").val(),
-                abreviatura: $("#abreviatura").val(),
+                email: $("#email").val(),
                 curso: $("#curso").val(),
             };
-            $.post("/api/turmas", turmas, function(data) {
-                novaTurma = JSON.parse(data);
-                linha = getLin(novaTurma);
+            $.post("/api/alunos", alunos, function(data) {
+                novoAluno = JSON.parse(data);
+                linha = getLin(novoAluno);
                 $('#tabela>tbody').append(linha);
             });
         }
 
         function update(id) {
-            turmas = {
+            alunos = {
                 nome: $("#nome").val(),
-                ano: $("#ano").val(),
-                abreviatura: $("#abreviatura").val(),
+                email: $("#email").val(),
                 curso: $("#curso").val(),
             };
 
             $.ajax({
                 type: "PUT",
-                url: "/api/turmas/"+id,
+                url: "/api/alunos/"+id,
                 context: this,
-                data: turmas,
+                data: alunos,
                 success: function (data) {
                     linhas = $("#tabela>tbody>tr");
                     e = linhas.filter( function(i, e) {
@@ -152,7 +131,7 @@
                     console.log(e[0]);
 
                     if(e) {
-                        e[0].cells[1].textContent = turmas.nome;
+                        e[0].cells[1].textContent = alunos.nome;
                     }
                 },
                 error: function(error) {
@@ -162,47 +141,28 @@
             })
         }
 
-        function getLin(turma) {
+        function getLin(aluno) {
             var linha = 
             "<tr style='text-align: center'>"+
-                "<td style='display: none'>"+ turma.id +"</td>"+
-                "<td>"+ turma.nome +"</td>"+
+                "<td style='display: none'>"+ aluno.id +"</td>"+
+                "<td>"+ aluno.nome +"</td>"+
                 "<td>"+
-                    "<a nohref style='cursor: pointer' onclick='visualizar("+turma.id+")'><img src='{{ asset('img/icons/info.svg') }}'></a>"+
-                    "<a nohref style='cursor: pointer' onclick='editar("+turma.id+")'><img src='{{ asset('img/icons/edit.svg') }}'></a>"+
+                    "<a nohref style='cursor: pointer' onclick='editar("+aluno.id+")'><img src='{{ asset('img/icons/edit.svg') }}'></a>"+
                 "</td>"+
             "</tr>";
 
             return linha;
         }
 
-        function visualizar(id) { 
-            $('#modalInfo').modal().find('.modal-body').html("");
-
-            $.getJSON('/api/turmas/'+id, function(data) {
-                let nome_curso = '';
-                $.getJSON('/api/cursos/'+data.curso_id, function(dataCurso) {
-                    $('#modalInfo').modal().find('.modal-body').append("<p>ID: <b>"+ data.id +"</b></p>");
-                    $('#modalInfo').modal().find('.modal-title').text(data.nome);
-                    $('#modalInfo').modal().find('.modal-body').append("<p>Ano: <b>"+ data.ano +"</b></p>");
-                    $('#modalInfo').modal().find('.modal-body').append("<p>Abreviatura: <b>"+ data.abreviatura +"</b></p>");
-                    $('#modalInfo').modal().find('.modal-body').append("<p>Curso: <b>"+ dataCurso.nome +"</b></p>");
-
-                    $('#modalInfo').modal('show');
-                });
-            });
-        }
-
         function editar(id) { 
-            $('#modalTurma').modal().find('.modal-title').text("Alterar Turma");
+            $('#modalAluno').modal().find('.modal-title').text("Alterar Aluno");
 
-            $.getJSON('/api/turmas/'+id, function(data) {
+            $.getJSON('/api/alunos/'+id, function(data) {
                 $('#id').val(data.id);
                 $('#nome').val(data.nome);
-                $('#ano').val(data.ano);
-                $('#abreviatura').val(data.abreviatura);
+                $('#email').val(data.email);
                 $('#curso').val(data.curso);
-                $('#modalTurma').modal('show');
+                $('#modalAluno').modal('show');
             });
         }
 

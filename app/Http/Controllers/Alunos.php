@@ -24,7 +24,7 @@ class Alunos extends Controller
         $novo = new Aluno();
         $novo->nome = $request->input('nome');
         $novo->email = $request->input('email');
-        $novo->curso_id = $request->input('curso_id');
+        $novo->curso_id = $request->input('curso');
         $novo->save();
 
         return json_encode($novo);
@@ -69,10 +69,10 @@ class Alunos extends Controller
         if(isset($aluno)) {
             $aluno->nome = $request->input('nome');
             $aluno->email = $request->input('email');
-            $aluno->curso_id = $request->input('curso_id');
+            $aluno->curso_id = $request->input('curso');
             $aluno->save();
 
-            return json_encode($curso);
+            return json_encode($aluno);
         }
         return response('Aluno nao encontrado', 404);
     }

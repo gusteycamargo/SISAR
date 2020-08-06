@@ -33,7 +33,7 @@
                 <img style="width: 128px; height: 128px" src="{{ asset('img/aluno_ico.png') }}">
             </a>
             <h3>
-                <b>Turma</b>
+                <b>Aluno</b>
             </h3>
         </div>
        

@@ -32,14 +32,6 @@
                             <label><b>Nome</b></label>
                             <input type="text" class="form-control" name="nome" id="nome" required>
                         </div>
-                        <div class='col-sm-12' style="margin-top: 10px">
-                            <label>Abreviatura</label>
-                            <input type="text" class="form-control" name="abreviatura" id="abreviatura" required>
-                        </div>
-                        <div class='col-sm-12' style="margin-top: 10px">
-                            <label>Tempo (em anos)</label>
-                            <input type="number" class="form-control" name="tempo" id="tempo" required>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Salvar</button>
@@ -73,8 +65,6 @@
         function criar() {
             $('#modalCurso').modal().find('.modal-title').text("Novo Curso");
             $('#nome').val('');
-            $('#abreviatura').val('');
-            $('#tempo').val('');
             $('#modalCurso').modal('show');
         }
 
@@ -98,8 +88,6 @@
         function insert() {
             cursos = {
                 nome: $("#nome").val(),
-                abreviatura: $("#abreviatura").val(),
-                tempo: $("#tempo").val(),
             };
             console.log(cursos);
             $.post("/api/cursos", cursos, function(data) {
@@ -112,8 +100,6 @@
         function update(id) {
             cursos = {
                 nome: $("#nome").val(),
-                abreviatura: $("#abreviatura").val(),
-                tempo: $("#tempo").val(),
             };
 
             $.ajax({
@@ -160,8 +146,6 @@
             $.getJSON('/api/cursos/'+id, function(data) {
                 $('#modalInfo').modal().find('.modal-body').append("<p>ID: <b>"+ data.id +"</b></p>");
                 $('#modalInfo').modal().find('.modal-title').text(data.nome);
-                $('#modalInfo').modal().find('.modal-body').append("<p>Abreviatura: <b>"+ data.abreviatura +"</b></p>");
-                $('#modalInfo').modal().find('.modal-body').append("<p>Tempo (em anos): <b>"+ data.tempo +"</b></p>");
 
                 $('#modalInfo').modal('show');
             });
@@ -173,8 +157,6 @@
             $.getJSON('/api/cursos/'+id, function(data) {
                 $('#id').val(data.id);
                 $('#nome').val(data.nome);
-                $('#abreviatura').val(data.abreviatura);
-                $('#tempo').val(data.tempo);
                 $('#modalCurso').modal('show');
             });
         }

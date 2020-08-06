@@ -23,8 +23,6 @@ class Cursos extends Controller
     {
         $novo = new Curso();
         $novo->nome = $request->input('nome');
-        $novo->abreviatura = $request->input('abreviatura');
-        $novo->tempo = $request->input('tempo');
         $novo->save();
 
         return json_encode($novo);
@@ -72,8 +70,6 @@ class Cursos extends Controller
         $curso = Curso::findOrFail($id);
         if(isset($curso)) {
             $curso->nome = $request->input('nome');
-            $curso->abreviatura = $request->input('abreviatura');
-            $curso->tempo = $request->input('tempo');
             $curso->save();
 
             return json_encode($curso);

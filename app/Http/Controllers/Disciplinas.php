@@ -23,8 +23,8 @@ class Disciplinas extends Controller
     {
         $novo = new Disciplina();
         $novo->nome = $request->input('nome');
-        $novo->professor_id = $request->input('professor_id');
-        $novo->curso_id = $request->input('curso_id');
+        $novo->professor_id = $request->input('professor');
+        $novo->curso_id = $request->input('curso');
         $novo->save();
 
         return json_encode($novo);
@@ -68,8 +68,8 @@ class Disciplinas extends Controller
         $disciplina = Disciplina::findOrFail($id);
         if(isset($disciplina)) {
             $disciplina->nome = $request->input('nome');
-            $disciplina->professor_id = $request->input('professor_id');
-            $disciplina->curso_id = $request->input('curso_id');
+            $disciplina->professor_id = $request->input('professor');
+            $disciplina->curso_id = $request->input('curso');
             $disciplina->save();
 
             return json_encode($disciplina);

@@ -24,9 +24,9 @@ class Professores extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function loadJson() {
+        $professores = Professor::all();
+        return json_encode($professores);
     }
 
     /**

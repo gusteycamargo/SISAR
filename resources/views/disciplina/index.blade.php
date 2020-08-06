@@ -33,100 +33,16 @@
                             <input type="text" class="form-control" name="nome" id="nome" required>
                         </div>
                         <div class='col-sm-12' style="margin-top: 10px">
-                            <label>Número de bimestres</label>
-                            <input type="number" class="form-control" name="num_de_bimestres" id="num_de_bimestres" required>
-                        </div>
-                        <div class='col-sm-12' style="margin-top: 10px">
-                            <label>Componente Curricular</label>
-                            <select name="componente_id" id="componente_id" class="form-control" required>
+                            <label>Professor</label>
+                            <select name="professor" id="professor" class="form-control" required>
                                 
                             </select>
                         </div>
                         <div class='col-sm-12' style="margin-top: 10px">
-                            <label>Turma</label>
-                            <select name="turma" id="turma" class="form-control" required>
+                            <label>Curso</label>
+                            <select name="curso" id="curso" class="form-control" required>
                                 
                             </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-                        <button type="cancel" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" tabindex="-1" role="dialog" id="modalPeso">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form class="form-horizontal" id="formPeso">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Configuração de pesos</h5>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" id="idPeso" class="form-control">
-                        <input type="hidden" id="idDisc" class="form-control">
-                        <div class='col-sm-12'>
-                            <label><b>Trabalho</b></label>
-                            <input type="text" class="form-control" name="trabalho" id="trabalho" required>
-                        </div>
-                        <div class='col-sm-12' style="margin-top: 10px">
-                            <label>Avaliação</label>
-                            <input type="text" class="form-control" name="avaliacao" id="avaliacao" required>
-                        </div>
-                        <div class='col-sm-12' style="margin-top: 10px">
-                            <label>1º Bimestre</label>
-                            <input type="text" class="form-control" name="pri_bim" id="pri_bim" required>
-                        </div>
-                        <div class='col-sm-12' style="margin-top: 10px">
-                            <label>2º Bimestre</label>
-                            <input type="text" class="form-control" name="seg_bim" id="seg_bim">
-                        </div>
-                        <div class='col-sm-12' style="margin-top: 10px">
-                            <label>3° Bimestre</label>
-                            <input type="text" class="form-control" name="ter_bim" id="ter_bim">
-                        </div>
-                        <div class='col-sm-12' style="margin-top: 10px">
-                            <label>4º Bimestre</label>
-                            <input type="text" class="form-control" name="qua_bim" id="qua_bim">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-                        <button type="cancel" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" tabindex="-1" role="dialog" id="modalConceito">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form class="form-horizontal" id="formConceito">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Configuração de conceitos</h5>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" id="idConceito" class="form-control">
-                        <input type="hidden" id="idDisc" class="form-control">
-                        <div class='col-sm-12' style="margin-top: 10px">
-                            <label>A</label>
-                            <input type="text" class="form-control" name="a" id="a" required>
-                        </div>
-                        <div class='col-sm-12' style="margin-top: 10px">
-                            <label>B</label>
-                            <input type="text" class="form-control" name="b" id="b" required>
-                        </div>
-                        <div class='col-sm-12' style="margin-top: 10px">
-                            <label>C</label>
-                            <input type="text" class="form-control" name="c" id="c" required>
-                        </div>
-                        <div class='col-sm-12' style="margin-top: 10px">
-                            <label>D</label>
-                            <input type="text" class="form-control" name="d" id="d" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -142,7 +58,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Informações da turma</h5>
+                    <h5 class="modal-title">Informações da disciplina</h5>
                 </div>
                 <div class="modal-body">
                 </div>
@@ -159,17 +75,17 @@
 
     <script type="text/javascript">
         function loadSelects() {
-            $.getJSON('/api/turmas/load', function (data) {
+            $.getJSON('/api/cursos/load', function (data) {
                 for(i = 0; i < data.length; i++) {
                     item = '<option value="'+data[i].id+'">'+data[i].nome+'</option>';
-                    $('#turma').append(item);
+                    $('#curso').append(item);
                 }
             });
 
-            $.getJSON('/api/componentes/load', function (data) {
+            $.getJSON('/api/professores/load', function (data) {
                 for(i = 0; i < data.length; i++) {
                     item = '<option value="'+data[i].id+'">'+data[i].nome+'</option>';
-                    $('#componente_id').append(item);
+                    $('#professor').append(item);
                 }
             });
         }
@@ -182,9 +98,8 @@
         function criar() {
             $('#modalDisciplina').modal().find('.modal-title').text("Nova Disciplina");
             $('#nome').val('');
-            $('#num_de_bimestres').val('');
-            $('#component_id').val('');
-            $('#turma').val('');
+            $('#curso').val('');
+            $('#professor').val('');
             $('#modalDisciplina').modal('show');
         }
 
@@ -203,114 +118,13 @@
                 insert();
             }
             $('#modalDisciplina').modal('hide')
-        })
-
-        $("#formPeso").submit( function(event) {
-            event.preventDefault();
-            if($("#idPeso").val() != '') {
-                updatePeso( $("#idDisc").val() );
-            }
-            else {
-                insertPeso();
-            }
-            $('#modalPeso').modal('hide')
-        })
-
-        $("#formConceito").submit( function(event) {
-            event.preventDefault();
-            if($("#idConceito").val() != '') {
-                updateConceito( $("#idDisc").val() );
-            }
-            else {
-                insertConceito();
-            }
-            $('#modalConceito').modal('hide')
-        })
-
-        function insertPeso() {
-            pesos = {
-                trabalho: $('#trabalho').val(),
-                avaliacao: $('#avaliacao').val(),
-                pri_bim: $('#pri_bim').val(),
-                seg_bim: $('#seg_bim').val(),
-                ter_bim: $('#ter_bim').val(),
-                qua_bim: $('#qua_bim').val(),
-                disciplina_id: $('#idDisc').val(),
-            };
-            $.post("/api/pesos", pesos, function(data) {
-                console.log('200 OK PESO');
-            });
-        }
-
-        function insertConceito() {
-            conceitos = {
-                a: $('#a').val(),
-                b: $('#b').val(),
-                c: $('#c').val(),
-                d: $('#d').val(),
-                disciplina_id: $('#idDisc').val(),
-            };
-            $.post("/api/conceitos", conceitos, function(data) {
-                console.log('200 OK CONCEITO');
-            });
-        }
-
-        function updateConceito(id) {
-            conceitos = {
-                a: $('#a').val(),
-                b: $('#b').val(),
-                c: $('#c').val(),
-                d: $('#d').val(),
-                disciplina_id: $('#idDisc').val(),
-            };
-
-            $.ajax({
-                type: "PUT",
-                url: "/api/conceitos/"+id,
-                context: this,
-                data: conceitos,
-                success: function (data) {
-                    console.log(data);
-                    console.log('edicao conceito ok');
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            })
-        }
-
-        function updatePeso(id) {
-            pesos = {
-                trabalho: $('#trabalho').val(),
-                avaliacao: $('#avaliacao').val(),
-                pri_bim: $('#pri_bim').val(),
-                seg_bim: $('#seg_bim').val(),
-                ter_bim: $('#ter_bim').val(),
-                qua_bim: $('#qua_bim').val(),
-                disciplina_id: $('#idDisc').val(),
-            };
-
-            $.ajax({
-                type: "PUT",
-                url: "/api/pesos/"+id,
-                context: this,
-                data: pesos,
-                success: function (data) {
-                    console.log(data);
-                    console.log('edicao peso ok');
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            })
-        }
+        });
 
         function insert() {
             disciplinas = {
                 nome: $("#nome").val(),
-                num_de_bimestres: $("#num_de_bimestres").val(),
-                componente_id: $("#componente_id").val(),
-                turma: $("#turma").val(),
+                curso: $("#curso").val(),
+                professor: $("#professor").val(),
             };
             $.post("/api/disciplinas", disciplinas, function(data) {
                 novaDisciplina = JSON.parse(data);
@@ -322,9 +136,8 @@
         function update(id) {
             disciplinas = {
                 nome: $("#nome").val(),
-                num_de_bimestres: $("#num_de_bimestres").val(),
-                componente_id: $("#componente_id").val(),
-                turma: $("#turma").val(),
+                curso: $("#curso").val(),
+                professor: $("#professor").val(),
             };
 
             $.ajax({
@@ -357,34 +170,11 @@
                 "<td style='display: none'>"+ disciplina.id +"</td>"+
                 "<td>"+ disciplina.nome +"</td>"+
                 "<td>"+
-                    "<a nohref style='cursor: pointer' onclick='visualizar("+disciplina.id+")'><img src='{{ asset('img/icons/info.svg') }}'></a>"+
                     "<a nohref style='cursor: pointer' onclick='editar("+disciplina.id+")'><img src='{{ asset('img/icons/edit.svg') }}'></a>"+
-                    "<a nohref style='cursor: pointer' onclick='peso(\""+disciplina.id+"\",\""+disciplina.nome+"\")'><img src='{{ asset('img/icons/peso.svg') }}'></a>"+
-                    "<a nohref style='cursor: pointer' onclick='conceito(\""+disciplina.id+"\",\""+disciplina.nome+"\")''><img src='{{ asset('img/icons/conceito.svg') }}'></a>"+
                 "</td>"+
             "</tr>";
 
             return linha;
-        }
-
-        function visualizar(id) { 
-            $('#modalInfo').modal().find('.modal-body').html("");
-
-            $.getJSON('/api/disciplinas/'+id, function(data) {
-                let nome_turma = '';
-                $.getJSON('/api/turmas/'+data.turma_id, function(dataTurma) {
-                    $.getJSON('/api/componentes/'+data.componente_id, function(dataComponente) {
-
-                        $('#modalInfo').modal().find('.modal-body').append("<p>ID: <b>"+ data.id +"</b></p>");
-                        $('#modalInfo').modal().find('.modal-title').text(data.nome);
-                        $('#modalInfo').modal().find('.modal-body').append("<p>Bimestres: <b>"+ data.num_de_bimestres +"</b></p>");
-                        $('#modalInfo').modal().find('.modal-body').append("<p>Componente curricular: <b>"+ dataComponente.nome +"</b></p>");
-                        $('#modalInfo').modal().find('.modal-body').append("<p>Turma: <b>"+ dataTurma.nome +"</b></p>");
-
-                        $('#modalInfo').modal('show');
-                    });
-                });
-            });
         }
 
         function editar(id) { 
@@ -393,73 +183,10 @@
             $.getJSON('/api/disciplinas/'+id, function(data) {
                 $('#id').val(data.id);
                 $('#nome').val(data.nome);
-                $('#num_de_bimestres').val(data.num_de_bimestres);
-                $('#componente_id').val(data.componente_id);
-                $('#turma').val(data.turma);
+                $('#curso').val(data.curso);
+                $('#professor').val(data.professor);
                 $('#modalDisciplina').modal('show');
             });
-        }
-
-        function peso(id, nomeDisciplina) { 
-            $('#modalPeso').modal().find('.modal-title').text("Configurar peso: "+nomeDisciplina);
-            $('#idDisc').val(id)
-
-            $.ajax({
-                type: "GET",
-                url: "/api/pesos/"+id,
-                context: this,
-                success: function (data) {
-                    const json = JSON.parse(data);
-                    $('#idPeso').val(json.id);
-                    $('#trabalho').val(json.trabalho);
-                    $('#avaliacao').val(json.avaliacao);
-                    $('#pri_bim').val(json.pri_bim);
-                    $('#seg_bim').val(json.seg_bim);
-                    $('#ter_bim').val(json.ter_bim);
-                    $('#qua_bim').val(json.qua_bim);
-                },
-                error: function(error) {
-                    $('#idPeso').val('');
-                    $('#trabalho').val('');
-                    $('#avaliacao').val('');
-                    $('#pri_bim').val('');
-                    $('#seg_bim').val('');
-                    $('#ter_bim').val('');
-                    $('#qua_bim').val('');
-                    console.log(error);
-                }
-            })
-
-            $('#modalPeso').modal('show');
-        }
-
-        function conceito(id, nomeDisciplina) { 
-            $('#modalConceito').modal().find('.modal-title').text("Configurar conceito: "+nomeDisciplina);
-            $('#idDisc').val(id)
-
-            $.ajax({
-                type: "GET",
-                url: "/api/conceitos/"+id,
-                context: this,
-                success: function (data) {
-                    const json = JSON.parse(data);
-                    $('#idConceito').val(json.id);
-                    $('#a').val(json.a);
-                    $('#b').val(json.b);
-                    $('#c').val(json.c);
-                    $('#d').val(json.d);
-                },
-                error: function(error) {
-                    $('#idConceito').val('');
-                    $('#a').val('');
-                    $('#b').val('');
-                    $('#c').val('');
-                    $('#d').val('');
-                    console.log(error);
-                }
-            })
-
-            $('#modalConceito').modal('show');
         }
 
     </script>

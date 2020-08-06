@@ -28,7 +28,7 @@
                 <b>{{$titulo}}</b>
             </a>
             <a class="navbar-brand mx-auto">
-                <b>SETA - Sistema de Entrega de Trabalhos e Atividades</b>
+                <b>SISAR - Sistema de Avaliação Remota</b>
             </a>
             <ul class="navbar-nav">
                 <li class="nav-item" >

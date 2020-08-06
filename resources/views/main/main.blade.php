@@ -13,22 +13,6 @@
             </h3>
         </div>
         <div class="col-sm-3" style="text-align: center">
-            <a href="{{ route('componentes.index') }}">
-                <img src="{{ asset('img/componente_ico.png') }}">
-            </a>
-            <h3>
-                <b>Componente</b>
-            </h3>
-        </div>
-        <div class="col-sm-3" style="text-align: center">
-            <a href="{{ route('turmas.index') }}">
-                <img src="{{ asset('img/turma_ico.png') }}">
-            </a>
-            <h3>
-                <b>Turma</b>
-            </h3>
-        </div>
-        <div class="col-sm-3" style="text-align: center">
             <a href="{{ route('disciplinas.index') }}">
                 <img src="{{ asset('img/disciplina_ico.png') }}">
             </a>
@@ -36,6 +20,23 @@
                 <b>Disciplina</b>
             </h3>
         </div>
+        <div class="col-sm-3" style="text-align: center">
+            <a href="{{ route('professores.index') }}">
+                <img src="{{ asset('img/professor_ico.png') }}">
+            </a>
+            <h3>
+                <b>Professor</b>
+            </h3>
+        </div>
+        <div class="col-sm-3" style="text-align: center">
+            <a href="{{ route('alunos.index') }}">
+                <img src="{{ asset('img/aluno_ico.png') }}">
+            </a>
+            <h3>
+                <b>Turma</b>
+            </h3>
+        </div>
+       
      </div>
      <br>
 @endsection

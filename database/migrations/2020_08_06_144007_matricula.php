@@ -13,8 +13,8 @@ class Matricula extends Migration
      */
     public function up()
     {
-        Schema::create('matricula', function (Blueprint $table) {
-            $table->bigIncrements();
+        Schema::create('matriculas', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('aluno_id')->references('id')->on('alunos');
             $table->unsignedBigInteger('disciplina_id')->references('id')->on('disciplinas');
             $table->timestamps();
@@ -28,6 +28,6 @@ class Matricula extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('matricula');
+        Schema::dropIfExists('matriculas');
     }
 }

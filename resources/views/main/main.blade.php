@@ -6,7 +6,7 @@
      <div class='row'>
         <div class="col-sm-3" style="text-align: center">
             <a href="{{ route('cursos.index') }}">
-                <img src="{{ asset('img/curso_ico.png') }}">
+                <img style="width: 128px; height: 128px" src="{{ asset('img/curso_ico.png') }}">
             </a>
             <h3>
                 <b>Curso</b>
@@ -14,7 +14,7 @@
         </div>
         <div class="col-sm-3" style="text-align: center">
             <a href="{{ route('disciplinas.index') }}">
-                <img src="{{ asset('img/disciplina_ico.png') }}">
+                <img style="width: 128px; height: 128px" src="{{ asset('img/disciplina_ico.png') }}">
             </a>
             <h3>
                 <b>Disciplina</b>
@@ -22,7 +22,7 @@
         </div>
         <div class="col-sm-3" style="text-align: center">
             <a href="{{ route('professores.index') }}">
-                <img src="{{ asset('img/professor_ico.png') }}">
+                <img style="width: 128px; height: 128px" src="{{ asset('img/professor_ico.png') }}">
             </a>
             <h3>
                 <b>Professor</b>
@@ -30,7 +30,7 @@
         </div>
         <div class="col-sm-3" style="text-align: center">
             <a href="{{ route('alunos.index') }}">
-                <img src="{{ asset('img/aluno_ico.png') }}">
+                <img style="width: 128px; height: 128px" src="{{ asset('img/aluno_ico.png') }}">
             </a>
             <h3>
                 <b>Turma</b>

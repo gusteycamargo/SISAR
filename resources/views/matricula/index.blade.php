@@ -104,6 +104,9 @@
             if(array.length > 0) {
                 insert(array);
             }
+            else {
+                alert('Selecione pelo menos uma opção!')
+            }
         }
 
         $.ajaxSetup({

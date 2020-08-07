@@ -147,14 +147,16 @@
                 data: disciplinas,
                 success: function (data) {
                     linhas = $("#tabela>tbody>tr");
+                    const dataParse = (JSON.parse(data));
                     e = linhas.filter( function(i, e) {
-                        const dataParse = (JSON.parse(data));
                         return e.cells[0].textContent == dataParse.id;
                     } );
                     console.log(e);
 
                     if(e) {
-                        e[0].cells[1].textContent = disciplinas.nome;
+                        e[0].cells[1].textContent = dataParse.nome;
+                        e[0].cells[2].textContent = dataParse.curso.nome;
+                        e[0].cells[3].textContent = dataParse.professor.nome;
                     }
                 },
                 error: function(error) {
@@ -169,6 +171,8 @@
             "<tr style='text-align: center'>"+
                 "<td style='display: none'>"+ disciplina.id +"</td>"+
                 "<td>"+ disciplina.nome +"</td>"+
+                "<td>"+ disciplina.curso.nome +"</td>"+
+                "<td>"+ disciplina.professor.nome +"</td>"+
                 "<td>"+
                     "<a nohref style='cursor: pointer' onclick='editar("+disciplina.id+")'><img src='{{ asset('img/icons/edit.svg') }}'></a>"+
                 "</td>"+

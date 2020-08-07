@@ -23,15 +23,13 @@ class Disciplinas extends Controller
 
     public function store(Request $request)
     {
-        $curso = Curso::findOrFail();
-        $professor = Professor::findOrFail();
+        $curso = Curso::findOrFail($request->input('curso'));
+        $professor = Professor::findOrFail($request->input('professor'));
 
-        $novo = new Disciplina($request->input('curso'));
+        $novo = new Disciplina();
         $novo->nome = $request->input('nome');
-        //$novo->professor_id = $request->input('professor');
         $novo->professor()->associate($professor);
         $novo->curso()->associate($curso); 
-        // = $request->input('curso');
         $novo->save();
 
         return json_encode($novo);
@@ -73,12 +71,15 @@ class Disciplinas extends Controller
     public function update(Request $request, $id)
     {
         $disciplina = Disciplina::findOrFail($id);
+        $curso = Curso::findOrFail($request->input('curso'));
+        $professor = Professor::findOrFail($request->input('professor'));
+
         if(isset($disciplina)) {
             $disciplina->nome = $request->input('nome');
-            $disciplina->professor_id = $request->input('professor');
-            $disciplina->curso_id = $request->input('curso');
-            $disciplina->save();
+            $disciplina->professor()->associate($professor);
+            $disciplina->curso()->associate($curso); 
 
+            $disciplina->save();
             return json_encode($disciplina);
         }
         return response('Disciplina nao encontrada', 404);

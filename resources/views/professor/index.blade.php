@@ -12,7 +12,7 @@
      <br>
  
      @component(
-         'components.tablelist', [
+         'components.tablelistProfessor', [
              "header" => ['Nome', 'E-mail', 'Eventos'],
              "data" => $professores
          ]

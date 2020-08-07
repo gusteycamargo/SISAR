@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Aluno;
+use App\Curso;
 
 class Alunos extends Controller
 {
@@ -21,13 +22,16 @@ class Alunos extends Controller
 
     public function store(Request $request)
     {
+        $curso = Curso::findOrFail($request->input('curso'));
         $novo = new Aluno();
         $novo->nome = $request->input('nome');
         $novo->email = $request->input('email');
-        $novo->curso_id = $request->input('curso');
+        $novo->curso()->associate($curso); 
         $novo->save();
 
-        return json_encode($novo);
+        $aluno = Aluno::with('curso')->findOrFail($novo->id);
+
+        return json_encode($aluno);
     }
 
     /**
@@ -71,8 +75,9 @@ class Alunos extends Controller
             $aluno->email = $request->input('email');
             $aluno->curso_id = $request->input('curso');
             $aluno->save();
+            $alunoa = Aluno::with('curso')->findOrFail($id);
 
-            return json_encode($aluno);
+            return json_encode($alunoa);
         }
         return response('Aluno nao encontrado', 404);
     }
@@ -83,8 +88,9 @@ class Alunos extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function redirectMatricula($id)
     {
-        //
+        $aluno = Aluno::with('curso')->findOrFail($id);
+        return view('matricula.index', compact(['aluno']));
     }
 }

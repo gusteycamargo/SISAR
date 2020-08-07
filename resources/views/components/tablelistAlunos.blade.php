@@ -21,8 +21,11 @@
                             @endforeach
                         </select>
                     </td>
+                    {{-- href="/matricula/{{$item['id'] }}" --}}
                     <td>
                         <a nohref style="cursor: pointer" onclick="editar('{{ $item['id'] }}')"><img src="{{ asset('img/icons/edit.svg') }}"></a>
+                        <a nohref style="cursor: pointer" href="{{ route('matriculas.show', $item['id']) }}"><img src="{{ asset('img/icons/config.svg') }}"></a>
+                    </td> 
                 </tr>
             @endforeach
         </tbody>

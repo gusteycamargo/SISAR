@@ -1,23 +1,51 @@
-@extends('templates.main', ['titulo' => "Aluno", 'tag' => "ALUNO"])
+@extends('templates.main', ['titulo' => "Matrículas", 'tag' => "MATRICULA"])
 
 @section('conteudo')
  
      <div class='row'>
-         <div class='col-sm-12'>
-            <button class="btn btn-primary btn-block" onclick="criar()">
-                <b>Cadastrar Novo Aluno</b>
-            </button>
+         <div class='col-sm-2'>
+            <a class="btn btn-secondary btn-block bg-dark" href="{{ route('alunos.index') }}">
+                <b>Voltar</b>
+            </a>
          </div>
+        <div class='col-sm-10'>
+            <div class="navbar navbar-expand-sm navbar-dark alert-secondary d-flex justify-content-between">
+                <div>
+                    <img width="36px" height="36px" src="{{ asset('img/curso_ico.png') }}">
+                    <a class="navbar-brand mx-auto">
+                        <p>{{$aluno['curso']['nome']}}</p>
+                    </a>
+                </div>
+                <div>
+                    <img width="36px" height="36px" src="{{ asset('img/aluno_ico.png') }}">
+                    <a class="navbar-brand mx-auto">
+                        <p>{{$aluno['nome']}}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
      </div>
+     <div class='row'>
+       <div class='col-sm-12'>
+           <div class="alert alert-primary d-flex justify-content-center">
+               <div class="d-flex justify-content-center">
+                    <img width="36px" height="36px" src="{{ asset('img/conceito_ico.png') }}">
+                    <a class="navbar-brand mx-auto">
+                        <b>Matrículas do aluno</b>
+                    </a>
+               </div>
+           </div>
+       </div>
+    </div>
      <br>
  
-     @component(
+     {{-- @component(
          'components.tablelistAlunos', [
              "header" => ['Nome', 'E-mail', 'Curso', 'Disciplinas', 'Eventos'],
              "data" => $alunos
          ]
      )
-     @endcomponent
+     @endcomponent --}}
 
      <div class="modal" tabindex="-1" role="dialog" id="modalAluno">
         <div class="modal-dialog" role="document">
@@ -71,6 +99,7 @@
             loadCursos();
         })
 
+        
         function criar() {
             $('#modalAluno').modal().find('.modal-title').text("Novo Aluno");
             $('#nome').val('');
@@ -169,7 +198,7 @@
                 "</td>"+
                 "<td>"+
                     "<a nohref style='cursor: pointer' onclick='editar("+aluno.id+")'><img src='{{ asset('img/icons/edit.svg') }}'></a>"+
-                    "<a nohref style='cursor: pointer' href='{{ route('matriculas.show', "+aluno.id+") }}''><img src='{{ asset('img/icons/config.svg') }}'></a>"+
+                    "<a nohref style='cursor: pointer' onclick='editar("+aluno.id+")'><img src='{{ asset('img/icons/config.svg') }}'></a>"+
                 "</td>"+
             "</tr>";
 

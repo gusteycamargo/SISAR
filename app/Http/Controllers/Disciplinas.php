@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Disciplina;
+use App\Curso;
+use App\Professor;
 
 class Disciplinas extends Controller
 {
@@ -14,17 +16,22 @@ class Disciplinas extends Controller
      */
     public function index()
     {
-        $disciplinas = Disciplina::all();
+        $disciplinas = Disciplina::with(['curso', 'professor'])->get();
 
         return view('disciplina.index', compact(['disciplinas']));
     }
 
     public function store(Request $request)
     {
-        $novo = new Disciplina();
+        $curso = Curso::findOrFail();
+        $professor = Professor::findOrFail();
+
+        $novo = new Disciplina($request->input('curso'));
         $novo->nome = $request->input('nome');
-        $novo->professor_id = $request->input('professor');
-        $novo->curso_id = $request->input('curso');
+        //$novo->professor_id = $request->input('professor');
+        $novo->professor()->associate($professor);
+        $novo->curso()->associate($curso); 
+        // = $request->input('curso');
         $novo->save();
 
         return json_encode($novo);

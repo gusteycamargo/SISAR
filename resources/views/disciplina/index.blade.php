@@ -13,7 +13,7 @@
  
      @component(
          'components.tablelistDisciplina', [
-             "header" => ['Nome', 'Eventos'],
+             "header" => ['Nome', 'Curso', 'Professor', 'Eventos'],
              "data" => $disciplinas
          ]
      )

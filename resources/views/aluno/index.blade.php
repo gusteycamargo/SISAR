@@ -13,7 +13,7 @@
  
      @component(
          'components.tablelistAlunos', [
-             "header" => ['Nome', 'Eventos'],
+             "header" => ['Nome', 'E-mail', 'Curso', 'Disciplinas', 'Eventos'],
              "data" => $alunos
          ]
      )
@@ -146,6 +146,7 @@
             "<tr style='text-align: center'>"+
                 "<td style='display: none'>"+ aluno.id +"</td>"+
                 "<td>"+ aluno.nome +"</td>"+
+                "<td>"+ aluno.email +"</td>"+
                 "<td>"+
                     "<a nohref style='cursor: pointer' onclick='editar("+aluno.id+")'><img src='{{ asset('img/icons/edit.svg') }}'></a>"+
                 "</td>"+

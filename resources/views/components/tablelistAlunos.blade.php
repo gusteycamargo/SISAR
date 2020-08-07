@@ -8,10 +8,19 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $item)
+            @foreach (json_decode($data, true) as $item)
                 <tr style="text-align: center">
                     <td style="display: none">{{ $item['id'] }}</td>
                     <td>{{ $item['nome'] }}</td>
+                    <td>{{ $item['email'] }}</td>
+                    <td>{{ $item['curso']['nome'] }}</td>
+                    <td>
+                        <select class="form-control">
+                            @foreach ($item['disciplina'] as $a)
+                                <option>{{$a['nome']}}</option>
+                            @endforeach
+                        </select>
+                    </td>
                     <td>
                         <a nohref style="cursor: pointer" onclick="editar('{{ $item['id'] }}')"><img src="{{ asset('img/icons/edit.svg') }}"></a>
                 </tr>

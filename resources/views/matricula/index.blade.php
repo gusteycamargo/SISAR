@@ -49,7 +49,7 @@
 
     <div class='row'>
         <div class='col-sm-12'>
-           <button class="btn btn-primary btn-block" onclick="criar()">
+           <button class="btn btn-primary btn-block" onclick="confirm()">
                <b>Confirmar Matrículas</b>
            </button>
         </div>
@@ -64,19 +64,26 @@
 
     <script type="text/javascript">
         function loadDisciplinasDoCurso(id) {
+            let a = {!! json_encode($aluno) !!}
+            console.log(a.disciplina);
             $.getJSON('/api/cursos/'+id, function (data) {
                 for(i = 0; i < data.disciplina.length; i++) {
+                    let checked = '';
+                    
+                    if(a.disciplina.some(disc => disc.id === data.disciplina[i].id)) {
+                        console.log('aaaa');
+                        checked = 'checked';
+                    }
                     item = "<tr>"+
                         "<td>"+
                             "<div class='custom-control custom-checkbox'>"+
-                                "<input type='checkbox' class='custom-control-input' id='customCheck"+i+"'>"+
+                                "<input type='checkbox' "+ checked +" name='disciplinas[]' class='custom-control-input' id='customCheck"+i+"' value='"+data.disciplina[i].id+"'>"+
                                 "<label class='custom-control-label' for='customCheck"+i+"'>"+data.disciplina[i].nome+"</label>"+
                             "</div>"+   
                         "</td>"+
                     "</tr>"
                     $('#tbod').append(item);
                 }
-                console.log(data);
             })
         }
 
@@ -85,13 +92,18 @@
             loadDisciplinasDoCurso(a.curso.id);
         })
 
-        
-        function criar() {
-            $('#modalAluno').modal().find('.modal-title').text("Novo Aluno");
-            $('#nome').val('');
-            $('#email').val('');
-            $('#curso').val('');
-            $('#modalAluno').modal('show');
+        function confirm() {
+            let a = $('input[name ="disciplinas[]"]') 
+            const array = [];
+            for (const b of a) {
+                if(b.checked) {
+                    array.push(b.value);
+                }
+            }
+
+            if(array.length > 0) {
+                insert(array);
+            }
         }
 
         $.ajaxSetup({
@@ -100,62 +112,20 @@
             }
         })
 
-        $("#formAlunos").submit( function(event) {
-            event.preventDefault();
-            if($("#id").val() != '') {
-                update( $("#id").val() );
+        function insert(array) {
+            let aluno = {!! json_encode($aluno) !!};
+
+            for (const idsD of array) {
+                matricula = {
+                    aluno: aluno.id,
+                    disciplina: idsD,
+                };
+                $.post("/api/matriculas", matricula, function(data) {
+                    console.log(data);
+                    
+                });
             }
-            else {
-                insert();
-            }
-            $('#modalAluno').modal('hide')
-        })
-
-        function insert() {
-            alunos = {
-                nome: $("#nome").val(),
-                email: $("#email").val(),
-                curso: $("#curso").val(),
-            };
-            $.post("/api/alunos", alunos, function(data) {
-                novoAluno = JSON.parse(data);
-                console.log(novoAluno);
-                linha = getLin(novoAluno);
-                $('#tabela>tbody').append(linha);
-            });
-        }
-
-        function update(id) {
-            alunos = {
-                nome: $("#nome").val(),
-                email: $("#email").val(),
-                curso: $("#curso").val(),
-            };
-
-            $.ajax({
-                type: "PUT",
-                url: "/api/alunos/"+id,
-                context: this,
-                data: alunos,
-                success: function (data) {
-                    linhas = $("#tabela>tbody>tr");
-                    const dataParse = (JSON.parse(data));
-                    e = linhas.filter( function(i, e) {
-                        return e.cells[0].textContent == dataParse.id;
-                    } );
-                    console.log(e[0]);
-
-                    if(e) {
-                        e[0].cells[1].textContent = dataParse.nome;
-                        e[0].cells[2].textContent = dataParse.email;
-                        e[0].cells[3].textContent = dataParse.curso.nome;
-                    }
-                },
-                error: function(error) {
-                    alert('ERRO - UPDATE');
-                    console.log(error);
-                }
-            })
+            alert('Matrículas realizadas')
         }
 
         function returnOptionsDisciplina(disciplina) {
@@ -166,41 +136,6 @@
                 }
             }
             return options
-        }
-
-        function getLin(aluno) {
-            let options = returnOptionsDisciplina(aluno.disciplina);
-            console.log(aluno);
-            var linha = 
-            "<tr style='text-align: center'>"+
-                "<td style='display: none'>"+ aluno.id +"</td>"+
-                "<td>"+ aluno.nome +"</td>"+
-                "<td>"+ aluno.email +"</td>"+
-                "<td>"+aluno.curso.nome+"</td>"+
-                "<td>"+
-                    "<select class='form-control'>"+
-                        options+
-                    "</select>"+
-                "</td>"+
-                "<td>"+
-                    "<a nohref style='cursor: pointer' onclick='editar("+aluno.id+")'><img src='{{ asset('img/icons/edit.svg') }}'></a>"+
-                    "<a nohref style='cursor: pointer' onclick='editar("+aluno.id+")'><img src='{{ asset('img/icons/config.svg') }}'></a>"+
-                "</td>"+
-            "</tr>";
-
-            return linha;
-        }
-
-        function editar(id) { 
-            $('#modalAluno').modal().find('.modal-title').text("Alterar Aluno");
-
-            $.getJSON('/api/alunos/'+id, function(data) {
-                $('#id').val(data.id);
-                $('#nome').val(data.nome);
-                $('#email').val(data.email);
-                $('#curso').val(data.curso);
-                $('#modalAluno').modal('show');
-            });
         }
 
     </script>

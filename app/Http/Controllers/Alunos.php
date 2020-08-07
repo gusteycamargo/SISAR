@@ -42,7 +42,7 @@ class Alunos extends Controller
      */
     public function show($id)
     {
-        $aluno = Aluno::findOrFail($id);
+        $aluno = Aluno::with(['disciplina', 'curso'])->findOrFail($id);
         if(isset($aluno)) {
             return json_encode($aluno);
         }

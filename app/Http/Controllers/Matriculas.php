@@ -54,7 +54,7 @@ class Matriculas extends Controller
      */
     public function show($id)
     {
-        $aluno = Aluno::with('curso')->findOrFail($id);
+        $aluno = Aluno::with(['disciplina', 'curso'])->findOrFail($id);
         return view('matricula.index', compact(['aluno']));
     }
 

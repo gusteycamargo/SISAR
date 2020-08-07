@@ -9,7 +9,7 @@
             </a>
          </div>
         <div class='col-sm-10'>
-            <div class="navbar navbar-expand-sm navbar-dark alert-secondary d-flex justify-content-between">
+            <div class="alert alert-dark d-flex justify-content-between" role="alert">
                 <div>
                     <img width="36px" height="36px" src="{{ asset('img/curso_ico.png') }}">
                     <a class="navbar-brand mx-auto">

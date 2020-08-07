@@ -40,7 +40,7 @@ class Cursos extends Controller
      */
     public function show($id)
     {
-        $curso = Curso::findOrFail($id);
+        $curso = Curso::with('disciplina')->findOrFail($id);
         if(isset($curso)) {
             return json_encode($curso);
         }

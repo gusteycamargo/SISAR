@@ -37,48 +37,25 @@
            </div>
        </div>
     </div>
-     <br>
- 
-     {{-- @component(
-         'components.tablelistAlunos', [
-             "header" => ['Nome', 'E-mail', 'Curso', 'Disciplinas', 'Eventos'],
-             "data" => $alunos
-         ]
-     )
-     @endcomponent --}}
 
-     <div class="modal" tabindex="-1" role="dialog" id="modalAluno">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form class="form-horizontal" id="formAlunos">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Novo Aluno</h5>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" id="id" class="form-control">
-                        <div class='col-sm-12'>
-                            <label><b>Nome</b></label>
-                            <input type="text" class="form-control" name="nome" id="nome" required>
-                        </div>
-                        <div class='col-sm-12' style="margin-top: 10px">
-                            <label>E-mail</label>
-                            <input type="text" class="form-control" name="email" id="email" required>
-                        </div>
-                        <div class='col-sm-12' style="margin-top: 10px">
-                            <label>Curso</label>
-                            <select name="curso" id="curso" class="form-control" required>
-                                
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-                        <button type="cancel" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    </div>
-                </form>
-            </div>
+
+    <div class="table-responsive" style="overflow-x: visible; overflow-y: visible;">
+        <table class='table table-striped' id="tabela">
+            <tbody id="tbod">
+                
+            </tbody>
+        </table>
+    </div>
+
+    <div class='row'>
+        <div class='col-sm-12'>
+           <button class="btn btn-primary btn-block" onclick="criar()">
+               <b>Confirmar Matrículas</b>
+           </button>
         </div>
     </div>
+
+     <br>
 
 @endsection
 
@@ -86,17 +63,26 @@
 
 
     <script type="text/javascript">
-        function loadCursos() {
-            $.getJSON('/api/cursos/load', function (data) {
-                for(i = 0; i < data.length; i++) {
-                    item = '<option value="'+data[i].id+'">'+data[i].nome+'</option>';
-                    $('#curso').append(item);
+        function loadDisciplinasDoCurso(id) {
+            $.getJSON('/api/cursos/'+id, function (data) {
+                for(i = 0; i < data.disciplina.length; i++) {
+                    item = "<tr>"+
+                        "<td>"+
+                            "<div class='custom-control custom-checkbox'>"+
+                                "<input type='checkbox' class='custom-control-input' id='customCheck"+i+"'>"+
+                                "<label class='custom-control-label' for='customCheck"+i+"'>"+data.disciplina[i].nome+"</label>"+
+                            "</div>"+   
+                        "</td>"+
+                    "</tr>"
+                    $('#tbod').append(item);
                 }
+                console.log(data);
             })
         }
 
         $(function() {
-            loadCursos();
+            let a = {!! json_encode($aluno) !!}
+            loadDisciplinasDoCurso(a.curso.id);
         })
 
         

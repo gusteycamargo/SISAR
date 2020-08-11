@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('main.main');
 });
+Route::get('/negado', function () {
+    return view('negado.index');
+});
 Route::resource('matriculas', 'Matriculas');
 Route::get('/alunosmatricula/{id}', 'Alunos@redirectMatricula');
 

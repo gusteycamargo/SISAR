@@ -21,7 +21,7 @@ class AccessLevel
 
         if($level == 0) {
             if($request->route()->getName() != '') {
-                return redirect('/');
+                return redirect('/negado');
             }
         }
         else if($level == 1) {
@@ -32,7 +32,7 @@ class AccessLevel
                 return $next($request);
             }
             else {
-                return redirect('/');
+                return redirect('/negado');
             }
         }
         else if($level == 2) {

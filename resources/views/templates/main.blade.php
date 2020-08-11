@@ -25,6 +25,8 @@
                     <img width="36px" height="36px" src="{{ asset('img/home_ico.svg') }}">
                 @elseif($tag=="MATRICULA")
                     <img width="36px" height="36px" src="{{ asset('img/conceito_ico.png') }}">
+                @elseif($tag=="NEGADO")
+                    <img width="36px" height="36px" src="{{ asset('img/negado.png') }}">
                 @endif
                 
                 <b>{{$titulo}}</b>

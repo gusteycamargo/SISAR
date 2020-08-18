@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('main.main');
-});
+})->middleware('auth');
 Route::get('/negado', function () {
     return view('negado.index');
 });
@@ -26,3 +26,7 @@ Route::resource('alunos', 'Alunos');
 Route::resource('cursos', 'Cursos');
 Route::resource('disciplinas', 'Disciplinas');
 Route::resource('professores', 'Professores');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

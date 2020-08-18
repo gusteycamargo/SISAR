@@ -42,20 +42,20 @@
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                 <ul class="navbar-nav">
-                    @if($tag=="MEN")
-                        <img src="{{ asset('/img/home_ico.png') }}" width="36px" height="36px">
-                    @elseif($tag=="AUT")
-                        <img src="{{ asset('/img/login_ico.png') }}" width="36px" height="36px">
-                    @elseif($tag=="REG")
-                        <img src="{{ asset('/img/registro_ico.png') }}" width="36px" height="36px">
-                    @elseif($tag=="ALU")
-                        <img src="{{ asset('/img/aluno_ico.png') }}" width="36px" height="36px">
-                    @elseif($tag=="PRO")
-                        <img src="{{ asset('/img/professor_ico.png') }}" width="36px" height="36px">
-                    @elseif($tag=="DIS")
-                        <img src="{{ asset('/img/componente_ico.png') }}" width="36px" height="36px">
-                    @elseif($tag=="CUR")
-                        <img src="{{ asset('/img/curso_ico.png') }}" width="36px" height="36px">
+                    @if($tag=="CURSO")
+                        <img width="36px" height="36px" src="{{ asset('img/curso_ico.png') }}">
+                    @elseif($tag=="ALUNO")
+                        <img width="36px" height="36px" src="{{ asset('img/aluno_ico.png') }}">
+                    @elseif($tag=="DISCIPLINA")
+                        <img width="36px" height="36px" src="{{ asset('img/disciplina_ico.png') }}">
+                    @elseif($tag=="PROFESSOR")
+                        <img width="36px" height="36px" src="{{ asset('img/professor_ico.png') }}">
+                    @elseif($tag=="HOME")
+                        <img width="36px" height="36px" src="{{ asset('img/home_ico.svg') }}">
+                    @elseif($tag=="MATRICULA")
+                        <img width="36px" height="36px" src="{{ asset('img/conceito_ico.png') }}">
+                    @elseif($tag=="NEGADO")
+                        <img width="36px" height="36px" src="{{ asset('img/negado.png') }}">
                     @endif
                     &nbsp;&nbsp;&nbsp; <a class="navbar-brand mx-auto"><b>{{ $titulo }}</b></a>
                 </ul>
@@ -113,7 +113,7 @@
     <footer>
         <b>&copy;2020
             &nbsp;&nbsp;&raquo;&nbsp;&nbsp;
-            Gil Eduardo de Andrade
+            Gustavo Galdino de Camargo
         </b>
     </footer>
 

@@ -34,6 +34,23 @@
                                 @enderror
                             </div>
                         </div>
+                        <!-- LEVEL -->
+                        <div class="form-group row">
+                            <label for="level" class="col-md-4 col-form-label text-md-right">{{ __('Level') }}</label>
+                            <div class="col-md-6">
+                                <select id="level" type="level" class="form-control @error('level') is-invalid @enderror" name="level" required>
+                                    <option selected="true" disabled="true"></option>
+                                    <option value="0">Básico</option>
+                                    <option value="1">Intermediário</option>
+                                    <option value="2">Avançado</option>
+                                </select>
+                                @error('level')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
                         <!-- SENHA -->
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Senha') }}</label>

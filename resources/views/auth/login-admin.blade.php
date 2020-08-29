@@ -1,4 +1,4 @@
-@extends('templates.default', ['titulo' => "Autenticação", 'tag' => "AUT"])
+@extends('templates.default', ['titulo' => "AUT ADM", 'tag' => "AUT"])
 
 @section('conteudo')
 
@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header bg-dark" style="color: #fff"><b>{{ __('Login') }}</b></div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login-admin-submit') }}">
                     @csrf
                         <!-- E-MAIL -->
                         <div class="form-group row">

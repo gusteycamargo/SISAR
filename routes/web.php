@@ -21,11 +21,15 @@ Route::get('/negado', function () {
 });
 Route::resource('matriculas', 'Matriculas');
 Route::get('/alunosmatricula/{id}', 'Alunos@redirectMatricula');
-
 Route::resource('alunos', 'Alunos');
 Route::resource('cursos', 'Cursos');
 Route::resource('disciplinas', 'Disciplinas');
 Route::resource('professores', 'Professores');
+
+Route::get('/admin', 'AdminController@index')->name('home-admin');
+Route::get('/admin/login', 'Auth\AdminLoginController@index')->name('login-admin');
+Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('login-admin-submit');
+Route::post('/admin/logout', 'Auth\AdminLoginController@logout')->name('logout-admin');
 
 Auth::routes();
 

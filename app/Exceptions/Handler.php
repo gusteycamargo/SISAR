@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Auth\AuthenticationException;
 
 class Handler extends ExceptionHandler
 {
@@ -37,6 +38,28 @@ class Handler extends ExceptionHandler
     public function report(Throwable $exception)
     {
         parent::report($exception);
+    }
+
+    protected function unauthenticated($request, AuthenticationException $execption) {
+
+        $guard = $execption->guards();
+
+        switch($guard[0]) {
+
+            case 'admin':
+                $redirect = "login-admin";
+                break;
+
+            case 'web':
+                $redirect = "login";
+                break;
+
+            default:
+                $redirect = "login";
+                break;
+        }
+
+        return redirect()->guest(route($redirect));
     }
 
     /**

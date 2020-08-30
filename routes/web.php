@@ -14,11 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('main.main');
-})->middleware('auth');
+    return view('home');
+});
+
 Route::get('/negado', function () {
     return view('negado.index');
 });
+
 Route::resource('matriculas', 'Matriculas');
 Route::get('/alunosmatricula/{id}', 'Alunos@redirectMatricula');
 Route::resource('alunos', 'Alunos');
@@ -33,4 +35,6 @@ Route::post('/admin/logout', 'Auth\AdminLoginController@logout')->name('logout-a
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home',function () {
+    return view('main.main');
+})->name('home');

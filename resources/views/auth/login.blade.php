@@ -1,4 +1,4 @@
-@extends('templates.default', ['titulo' => "Autenticação", 'tag' => "AUT"])
+@extends('templates.main', ['titulo' => "Autenticação", 'tag' => "AUT"])
 
 @section('conteudo')
 

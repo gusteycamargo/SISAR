@@ -68,32 +68,24 @@
                 <ul class="navbar-nav ml-auto">
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #fff" href="{{ route('login') }}"><b>| {{ __('Login') }} |</b></a>
+                            <a class="nav-link" style="color: #fff" href="{{ route('login-admin') }}"><b>| {{ __('Login') }} |</b></a>
                         </li>
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: #fff" href="{{ route('register') }}"><b>| {{ __('Registro') }} |</b></a>
-                            </li>
-                        @endif
-                    @else
+                    @elseif(Auth::guard('admin')->check())
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" style="color: #fff" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 <b>{{ Auth::user()->name }}</b><span class="caret"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item">
-                                    <u>Matrícula</u>: {{ Auth::user()->aluno_id }}
-                                </a>
-                                <a class="dropdown-item">
-                                    <u>E-mail</u>: {{ Auth::user()->email }}
+                                    E-mail: {{ Auth::user()->email }}
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <a class="dropdown-item" href="{{ route('logout-admin') }}"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                     <b>Sair</b>
                                 </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('logout-admin') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
                             </div>

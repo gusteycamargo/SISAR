@@ -6,13 +6,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header bg-dark" style="color: #fff"><b>{{ __('Login') }}</b></div>
+                <div class="card-header bg-dark" style="color: #fff"><b>{{ __('Autenticação do Professor') }}</b></div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                     @csrf
                         <!-- E-MAIL -->
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Endereço de e-Mail') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Endereço de e-mail') }}</label>
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                 @error('email')
@@ -40,11 +40,6 @@
                                 <button type="submit" class="btn btn-dark">
                                     {{ __('Login') }}
                                 </button>
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Esqueci a minha senha!') }}
-                                    </a>
-                                @endif
                             </div>
                         </div>
                     </form>

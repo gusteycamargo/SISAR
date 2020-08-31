@@ -15,19 +15,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('initial');
 
 Route::get('/negado', function () {
     return view('negado.index');
-});
+})->middleware('auth');;
 
-Route::resource('matriculas', 'Matriculas');
-Route::get('/alunosmatricula/{id}', 'Alunos@redirectMatricula');
-Route::resource('alunos', 'Alunos');
-Route::resource('cursos', 'Cursos');
-Route::resource('disciplinas', 'Disciplinas');
-Route::resource('professores', 'Professores');
+Route::resource('matriculas', 'Matriculas')->middleware('auth:admin');;
+Route::get('/alunosmatricula/{id}', 'Alunos@redirectMatricula')->middleware('auth:admin');;
+Route::resource('alunos', 'Alunos')->middleware('auth:admin');;
+Route::resource('cursos', 'Cursos')->middleware('auth:admin');
+Route::resource('disciplinas', 'Disciplinas')->middleware('auth:admin');;
+Route::resource('professores', 'Professores')->middleware('auth:admin');;
 
+Route::get('/provas', 'Provas@index')->name('prova')->middleware('auth');;
 Route::get('/admin', 'AdminController@index')->name('home-admin');
 Route::get('/admin/login', 'Auth\AdminLoginController@index')->name('login-admin');
 Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('login-admin-submit');
@@ -37,4 +38,4 @@ Auth::routes();
 
 Route::get('/home',function () {
     return view('main.main');
-})->name('home');
+})->name('home')->middleware('auth');;

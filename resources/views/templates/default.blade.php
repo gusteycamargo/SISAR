@@ -46,6 +46,8 @@
                         <img width="36px" height="36px" src="{{ asset('img/curso_ico.png') }}">
                     @elseif($tag=="ALUNO")
                         <img width="36px" height="36px" src="{{ asset('img/aluno_ico.png') }}">
+                    @elseif($tag=="AUT")
+                        <img width="36px" height="36px" src="{{ asset('img/login_ico.png') }}">
                     @elseif($tag=="DISCIPLINA")
                         <img width="36px" height="36px" src="{{ asset('img/disciplina_ico.png') }}">
                     @elseif($tag=="PROFESSOR")

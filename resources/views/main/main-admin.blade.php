@@ -1,10 +1,10 @@
 
- @extends('templates.default', ['titulo' => "Menu", 'tag' => "HOME"])
+ @extends('templates.main', ['titulo' => "Menu", 'tag' => "HOME"])
  @section('titulo') <b>Menu</b> @endsection
  @section('conteudo')
  
      <div class='row'>
-        {{-- <div class="col-sm-3" style="text-align: center">
+        <div class="col-sm-3" style="text-align: center">
             <a href="{{ route('cursos.index') }}">
                 <img style="width: 128px; height: 128px" src="{{ asset('img/curso_ico.png') }}">
             </a>
@@ -36,8 +36,7 @@
                 <b>Aluno</b>
             </h3>
         </div>
-        --}}
-        <h1>O ADMINISTRADOR ESTÁ ONLINE</h1>
+       
      </div>
      <br>
 @endsection

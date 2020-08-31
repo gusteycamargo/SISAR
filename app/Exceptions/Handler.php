@@ -55,7 +55,7 @@ class Handler extends ExceptionHandler
                 break;
 
             default:
-                $redirect = "login";
+                $redirect = "initial";
                 break;
         }
 

@@ -69,14 +69,11 @@
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul class="navbar-nav ml-auto">
                     @guest
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" style="color: #fff" href="{{ route('login') }}"><b>| {{ __('Login') }} |</b></a>
-                        </li>
                         @if (Route::has('register'))
                             <li class="nav-item">
                                 <a class="nav-link" style="color: #fff" href="{{ route('register') }}"><b>| {{ __('Registro') }} |</b></a>
                             </li>
-                        @endif -->
+                        @endif
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" style="color: #fff" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

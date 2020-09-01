@@ -72,6 +72,11 @@
                         <li class="nav-item">
                             <a class="nav-link" style="color: #fff" href="{{ route('login-admin') }}"><b>| {{ __('Login') }} |</b></a>
                         </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: #fff" href="{{ route('register') }}"><b>| {{ __('Registro') }} |</b></a>
+                            </li>
+                        @endif
                     @elseif(Auth::guard('admin')->check())
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" style="color: #fff" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
